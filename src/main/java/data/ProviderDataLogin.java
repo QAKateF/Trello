@@ -16,10 +16,10 @@ public class ProviderDataLogin {
     public Iterator<Object[]> userDtoWrongPassword() {
         List<Object[]> list = new ArrayList<>();
         list.add(new Object[]{
-                UserDTO.builder().email("juliagordyin@gmail.com").password("123456AA").build()
+                UserDTO.builder().email("f.ekaterin@gmail.com").password("Q9fWwzzV").build()
         });
         list.add(new Object[]{
-                UserDTO.builder().email("juliagordyin@gmail.com").password("123456aa").build()
+                UserDTO.builder().email("f.ekaterin@gmail.com").password("Q9fWwzz$").build()
         });
         return list.iterator();
     }
@@ -28,10 +28,10 @@ public class ProviderDataLogin {
     public Iterator<Object[]> userDtoLogin() {
         List<Object[]> list = new ArrayList<>();
         list.add(new Object[]{
-                UserDTO.builder().email("juliagordyin@gmail.com").password("123456Aa").build()
+                UserDTO.builder().email("f.ekaterin@gmail.com").password("Q9fWwzz$V").build()
         });
         list.add(new Object[]{
-                UserDTO.builder().email("juliagordyin@gmail.com").password("123456Aa").build()
+                UserDTO.builder().email("f.ekaterin@gmail.com").password("Q9fWwzz$V").build()
         });
         return list.iterator();
     }
@@ -43,14 +43,13 @@ public class ProviderDataLogin {
         try (BufferedReader reader = new BufferedReader(new FileReader(new File(path)))) {
             String line = reader.readLine();
             while (line != null) {
-                String[] split = line.split(",");
+                String[] split = line.split(";");
                 list.add(new Object[]{UserDTO.builder().email(split[0]).password(split[1]).build()});
                 line = reader.readLine();
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        //  reader.close();
         return list.iterator();
     }
 

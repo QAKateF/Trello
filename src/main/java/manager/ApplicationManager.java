@@ -3,6 +3,7 @@ package manager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.BrowserType;
@@ -41,6 +42,7 @@ public class ApplicationManager {
     }
 
     public String getEmail() {return properties.getProperty("email"); }
+
     public String getPassword() { return properties.getProperty("password"); }
 
     public WebDriverWait getWait() {
@@ -52,8 +54,9 @@ public class ApplicationManager {
     }
 
     public HelperLogout getHelperLogout() {return helperLogout;}
+
     public HelperMainPage getHelperMainPage() { return helperMainPage;}
-    @BeforeSuite
+
     public void init(){
         String target = System.getProperty("target", "prod");
         String path = String.format("src/test/resources/%s.properties", target);
@@ -61,14 +64,24 @@ public class ApplicationManager {
             properties.load(fr);
         } catch (IOException e) {
         }
-        if(browser.equals(BrowserType.CHROME)) {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            WebDriverManager.chromedriver().setup();
-            driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
-        } else if (browser.equals(BrowserType.FIREFOX)) {
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
-            WebDriverManager.firefoxdriver().setup();
-            driver = new EventFiringWebDriver(new FirefoxDriver(firefoxOptions));
+//        if(browser.equals(BrowserType.CHROME)) {
+//            ChromeOptions chromeOptions = new ChromeOptions();
+//            WebDriverManager.chromedriver().setup();
+//            driver = new EventFiringWebDriver(new ChromeDriver(chromeOptions));
+//        } else if (browser.equals(BrowserType.FIREFOX)) {
+//            FirefoxOptions firefoxOptions = new FirefoxOptions();
+//            WebDriverManager.firefoxdriver().setup();
+//            driver = new EventFiringWebDriver(new FirefoxDriver(firefoxOptions));
+//        }
+        if (browser.equals(BrowserType.CHROME)){
+            driver = new EventFiringWebDriver(new ChromeDriver());
+            logger.info("Tests Using Chrome");
+        } else if (browser.equals(BrowserType.FIREFOX)){
+            driver = new EventFiringWebDriver(new FirefoxDriver());
+            logger.info("Tests Using Firefox");
+        } else if (browser.equals(BrowserType.EDGE)){
+            driver = new EventFiringWebDriver(new EdgeDriver());
+            logger.info("Tests Using Edge");
         }
         driver.register(new WebDriverListener());
         helperLogin = new HelperLogin(driver);
@@ -87,7 +100,6 @@ public class ApplicationManager {
         driver.navigate().to("https://trello.com/");
     }
 
-    @AfterSuite
     public void tearDown(){
         driver.quit();
     }

@@ -69,7 +69,7 @@ public class HelperBase {
         try {
             changeImplicitlyTime(0);
             // here need to be carefully and to be sure that we get Implicitly Time back to 60 seconds
-            // and to use it only - when we know that the page downloaded and we do not need to wait it
+            // and to use it only - when we know that the page downloaded, and we do not need to wait it
             // get run time for all tests 41 seconds, without changing -> 2 m 42 sec
             elements = driver.findElements(locator);
         } catch (Exception e) {

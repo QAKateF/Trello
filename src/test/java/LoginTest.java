@@ -45,9 +45,7 @@ public class LoginTest extends TestBase {
         app.getHelperLogin().openLoginPage();
         app.getHelperLogin().enterEmailLogin(userDtoFromProperties);
         app.getHelperLogin().clickContinueLogin();
-        WebDriverWait wait = app.getWait();
-        //  Assert.assertTrue(app.getHelperLogin().validatePasswordInputEnable(app.getWait()));
-        Assert.assertTrue(app.getHelperLogin().validatePasswordInputEnable(wait));
+        Assert.assertTrue(app.getHelperLogin().validatePasswordInputEnable(app.getWait()));
     }
 
     @Test(dataProvider = "userDtoWrongPassword", dataProviderClass = ProviderDataLogin.class)

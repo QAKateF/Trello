@@ -6,7 +6,7 @@ public class MainPageTest extends TestBase{
 
     @BeforeMethod(alwaysRun = true)
     public void checkIsLogin() {
-        if (app.getHelperLogin().validateLoginSuccess2()) { // will be res = true or res=false
+        if (app.getHelperLogin().validateLoginSuccess2()) {  // will be res = true or res = false
             app.getHelperLogout().logout();
         } else {
             app.navigateToMainPage();
